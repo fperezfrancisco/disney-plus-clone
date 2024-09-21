@@ -27,7 +27,7 @@ function MovieList({ genreId, indexMain }) {
   };
 
   return (
-    <div className="relative scroll-smooth">
+    <div className="relative scroll-smooth w-full">
       <HiChevronLeft
         className={`text-white text-[50px] p-2 z-10 cursor-pointer hidden md:block absolute ${
           indexMain % 3 == 0 ? "mt-[80px]" : "mt-[150px]"

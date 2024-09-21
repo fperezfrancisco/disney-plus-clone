@@ -9,11 +9,13 @@ import GenreMovieList from "./components/GenreMovieList";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [sliderLoaded, setSliderLoaded] = useState(false);
 
   return (
     <>
       <Header />
-      <Slider />
+      {}
+      <Slider setSlider={setSliderLoaded} />
       <ProductionHouse />
       <GenreMovieList />
     </>

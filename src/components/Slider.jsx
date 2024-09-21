@@ -2,15 +2,21 @@ import React, { useEffect, useState, useRef } from "react";
 import GlobalApi from "../Services/GlobalApi";
 const image_base_url = "https://image.tmdb.org/t/p";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import SliderImg from "./SliderImg";
 
-function Slider() {
+function Slider({ setSlider }) {
   const [movieList, setMovieList] = useState([]);
+
+  const [img, setImg] = useState();
+
   const elementRef = useRef();
   const screenWidth = window.innerWidth;
 
   useEffect(() => {
-    getTrendingMovies();
-  }, []);
+    setTimeout(() => {
+      getTrendingMovies();
+    }, 5000);
+  }, [movieList]);
 
   const getTrendingMovies = () => {
     GlobalApi.getTrendingVideos.then((resp) => {
@@ -53,12 +59,17 @@ function Slider() {
         className="flex overflow-x-auto w-full px-16 py-4 scrollbar-hide scroll-smooth"
         ref={elementRef}
       >
-        {movieList.map((item) => (
-          <img
-            src={image_base_url + "/original/" + item.backdrop_path}
-            className="min-w-full w-full  lg:w-full md:h-fit lg:max-h-[550px] object-cover object-left-top lg:object-top-center mr-5 rounded-md lg:max-w-[1200px]  hover:border-[4px] border-gray-400 transition-all duration-200 ease-in-out"
-          />
-        ))}
+        {movieList.length > 0 ? (
+          movieList.map((item) => (
+            <SliderImg
+              imgPath={item.backdrop_path}
+              baseURL={image_base_url}
+              key={item.id}
+            />
+          ))
+        ) : (
+          <div className="flex w-full bg-gray-500 h-full min-h-[500px] rounded animate-pulse"></div>
+        )}
       </div>
     </>
   );
