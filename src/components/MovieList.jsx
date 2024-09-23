@@ -35,7 +35,7 @@ function MovieList({ genreId, indexMain }) {
         onClick={() => slideLeft(elementRef.current)}
       />
       <div
-        className="flex overflow-x-auto gap-8 scrollbar-hide pt-5 px-3 pb-10 scroll-smooth"
+        className="flex overflow-x-auto pt-2 pb-2 gap-4 md:gap-8 scrollbar-hide md:pt-5 px-3 md:pb-8 scroll-smooth"
         ref={elementRef}
       >
         {movieList.map((item, index) => (

@@ -6,6 +6,9 @@ import Header from "./components/Header";
 import Slider from "./components/Slider";
 import ProductionHouse from "./components/ProductionHouse";
 import GenreMovieList from "./components/GenreMovieList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import MoviePage from "./Pages/MoviePage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,11 +16,13 @@ function App() {
 
   return (
     <>
-      <Header />
-      {}
-      <Slider setSlider={setSliderLoaded} />
-      <ProductionHouse />
-      <GenreMovieList />
+      <BrowserRouter basename="/disney-plus-clone">
+        <Header />
+        <Routes>
+          <Route path="/" index element={<Home />} />
+          <Route path="/movie/:id" index element={<MoviePage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

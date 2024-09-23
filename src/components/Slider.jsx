@@ -64,6 +64,7 @@ function Slider({ setSlider }) {
             <SliderImg
               imgPath={item.backdrop_path}
               baseURL={image_base_url}
+              itemId={item.id}
               key={item.id}
             />
           ))

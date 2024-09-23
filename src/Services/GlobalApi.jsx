@@ -20,7 +20,34 @@ async function getMovieByGenreId(id) {
   return await axios.get(movieByGenreBaseUrl + "&with_genres=" + id);
 }
 
+async function getMovieDetails(id) {
+  return await axios.get(
+    movieBaseUrl + "/movie/" + id + "?api_key=5d78ed64237414a6aafcbdb053b772a0"
+  );
+}
+
+async function getSimilarMovies(id) {
+  return await axios.get(
+    movieBaseUrl +
+      "/movie/" +
+      id +
+      "/similar?api_key=5d78ed64237414a6aafcbdb053b772a0"
+  );
+}
+
+async function getRecommendedMovies(id) {
+  return await axios.get(
+    movieBaseUrl +
+      "/movie/" +
+      id +
+      "/recommendations?api_key=5d78ed64237414a6aafcbdb053b772a0"
+  );
+}
+
 export default {
   getTrendingVideos,
   getMovieByGenreId,
+  getMovieDetails,
+  getSimilarMovies,
+  getRecommendedMovies,
 };

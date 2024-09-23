@@ -11,32 +11,38 @@ import {
 import { HiDotsVertical } from "react-icons/hi";
 import HeaderItem from "./HeaderItem";
 import profileImg from "../assets/Images/profile-img.jpg";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
 
   const menu = [
-    { name: "HOME", icon: HiHome },
-    { name: "SEARCH", icon: HiMagnifyingGlass },
-    { name: "WATCH LIST", icon: HiPlus },
+    { name: "HOME", icon: HiHome, link: "/" },
+    { name: "SEARCH", icon: HiMagnifyingGlass, link: "/" },
+    { name: "WATCH LIST", icon: HiPlus, link: "/" },
     //{ name: "ORIGINALS", icon: HiStar },
-    { name: "MOVIES", icon: HiPlayCircle },
-    { name: "SERIES", icon: HiTv },
+    { name: "MOVIES", icon: HiPlayCircle, link: "/" },
+    { name: "SERIES", icon: HiTv, link: "/" },
   ];
 
   return (
     <div className="flex items-center justify-between p-5">
       <div className="flex items-center gap-8">
-        <img src={logo} className="w-[100px] md:w-[115px] object-cover" />
+        <Link to="/">
+          <img src={logo} className="w-[100px] md:w-[115px] object-cover" />
+        </Link>
+
         <div className="hidden md:flex items-center gap-5">
           {menu.map((item) => (
-            <HeaderItem name={item.name} Icon={item.icon} />
+            <HeaderItem name={item.name} Icon={item.icon} link={item.link} />
           ))}
         </div>
         <div className="flex md:hidden items-center gap-5">
           {menu.map(
             (item, index) =>
-              index < 3 && <HeaderItem name={""} Icon={item.icon} />
+              index < 3 && (
+                <HeaderItem name={""} Icon={item.icon} link={item.link} />
+              )
           )}
           <div className="md:hidden" onClick={() => setToggle(!toggle)}>
             <HeaderItem name={""} Icon={HiDotsVertical} />
