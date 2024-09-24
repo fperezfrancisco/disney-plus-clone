@@ -11,10 +11,12 @@ import {
 import { HiDotsVertical } from "react-icons/hi";
 import HeaderItem from "./HeaderItem";
 import profileImg from "../assets/Images/profile-img.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const menu = [
     { name: "HOME", icon: HiHome, link: "/" },
@@ -24,6 +26,10 @@ function Header() {
     { name: "MOVIES", icon: HiPlayCircle, link: "/" },
     { name: "SERIES", icon: HiTv, link: "/" },
   ];
+
+  const goRegister = () => {
+    navigate("/registration");
+  };
 
   return (
     <div className="flex items-center justify-between p-5">
@@ -59,9 +65,21 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="w-[40px] h-[40px] rounded-full bg-slate-500 text-black text-center flex  justify-center items-center font-bold text-xl">
-        F
-      </div>
+
+      {loggedIn ? (
+        <div className="w-[40px] h-[40px] rounded-full bg-slate-500 text-black text-center flex  justify-center items-center font-bold text-xl">
+          F
+        </div>
+      ) : (
+        <div className="ml-2">
+          <button
+            className="text-[0.75rem] lg:text-sm lg:px-8 border-teal-500 border-2 text-teal-500 px-4 py-2 font-medium rounded-lg hover:bg-teal-950"
+            onClick={goRegister}
+          >
+            Sign in
+          </button>
+        </div>
+      )}
     </div>
   );
 }

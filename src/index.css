@@ -33,10 +33,38 @@ body {
   background-color: rgba(0, 0, 0, 0.35);
   background-image: linear-gradient(
     to right,
-    rgba(19, 21, 32, 0.95),
+    rgba(19, 21, 32, 1),
     rgba(19, 21, 32, 0.9),
     rgba(19, 21, 32, 0.2),
     rgba(19, 21, 32, 0.05),
     rgba(19, 21, 32, 0)
   );
+}
+
+#registrationOverlayDesktop {
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: linear-gradient(
+    to right,
+    rgba(19, 21, 32, 0.95),
+    rgba(19, 21, 32, 0.9),
+    rgba(19, 21, 32, 0.25),
+    rgba(19, 21, 32, 0),
+    rgba(19, 21, 32, 0)
+  );
+}
+
+#registrationOverlay {
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: linear-gradient(
+    to top,
+    rgba(19, 21, 32, 0.95),
+    rgba(19, 21, 32, 0.5),
+    rgba(19, 21, 32, 0),
+    rgba(19, 21, 32, 0)
+  );
+}
+
+#registerModal {
+  height: 100% !important;
+  min-height: fit-content;
 }
