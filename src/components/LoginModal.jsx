@@ -2,15 +2,30 @@ import React, { useState } from "react";
 import logo from "../assets/Images/disney-logo-official.png";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/init";
 
-function LoginModal({ cancelModal }) {
+function LoginModal({ cancelModal, registerUser, setRegisterUser }) {
   const [userEmail, setUserEmail] = useState();
   const [userPassword, setUserPassword] = useState();
   const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    alert("Logged in!");
+    cancelModal(false);
+    signInWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        setRegisterUser(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage + errorCode);
+      });
   };
 
   const handleBack = () => {

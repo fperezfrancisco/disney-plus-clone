@@ -5,10 +5,9 @@ import logo from "../assets/Images/disney-logo-official.png";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
-function RegisterModal({ cancelModal }) {
+function RegisterModal({ cancelModal, registerUser, setRegisterUser }) {
   const [userEmail, setUserEmail] = useState();
   const [userPassword, setUserPassword] = useState();
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -22,7 +21,7 @@ function RegisterModal({ cancelModal }) {
       .then((resp) => {
         console.log(resp.user);
         alert("Registered!");
-        setUser(resp.user);
+        setRegisterUser(resp.user);
       })
       .catch((err) => {
         console.log(err.message);

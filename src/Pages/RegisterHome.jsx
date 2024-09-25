@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/Images/disney-logo-official.png";
 import mobileImg from "../assets/register-mobile.webp";
 import desktopImg from "../assets/desktop-bg.jpg";
@@ -7,9 +7,10 @@ import { HiArrowLeftCircle } from "react-icons/hi2";
 import RegisterModal from "../components/RegisterModal";
 import LoginModal from "../components/LoginModal";
 
-function RegisterHome() {
+function RegisterHome({ user, setUser }) {
   const [signUp, setSignUp] = useState(false);
   const [logIn, setLogIn] = useState(false);
+  const [registerUser, setRegisterUser] = useState();
 
   const handleSignUp = () => {
     setLogIn(false);
@@ -20,6 +21,13 @@ function RegisterHome() {
     setSignUp(false);
     setLogIn(true);
   };
+
+  useEffect(() => {
+    console.log(registerUser);
+    if (!user && registerUser) {
+      setUser(registerUser);
+    }
+  }, [registerUser]);
 
   return (
     <div className="relative h-full">
@@ -81,8 +89,20 @@ function RegisterHome() {
           </div>
         </div>
       </section>
-      {signUp && <RegisterModal cancelModal={setSignUp} />}
-      {logIn && <LoginModal cancelModal={setLogIn} />}
+      {signUp && (
+        <RegisterModal
+          cancelModal={setSignUp}
+          registerUser={registerUser}
+          setRegisterUser={setRegisterUser}
+        />
+      )}
+      {logIn && (
+        <LoginModal
+          cancelModal={setLogIn}
+          registerUser={registerUser}
+          setRegisterUser={setRegisterUser}
+        />
+      )}
     </div>
   );
 }

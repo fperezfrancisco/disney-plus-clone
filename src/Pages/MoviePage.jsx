@@ -7,7 +7,7 @@ import RecommendedMovieList from "../components/RecommendedMovieList";
 import Header from "../components/Header";
 const image_base_url = "https://image.tmdb.org/t/p/original";
 
-function MoviePage() {
+function MoviePage({ user }) {
   const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [movie, setMovie] = useState();
@@ -34,7 +34,7 @@ function MoviePage() {
 
   return (
     <div>
-      <Header />
+      <Header user={user} />
       <section className="w-full min-w-full min-h-[600px] h-full mb-4 flex flex-col relative md:p-8 md:pt-2">
         <div className="movieBanner overflow-hidden relative w-full min-w-[300px] min-h-[500px] h-full md:max-h-[700px] md:min-h-[700px] flex flex-col-reverse bg-[rgba(19, 21, 32, 1)] md:rounded-lg">
           {movie ? (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/Images/disney-logo-official.png";
 import {
   HiHome,
@@ -13,7 +13,7 @@ import HeaderItem from "./HeaderItem";
 import profileImg from "../assets/Images/profile-img.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({ user }) {
   const [toggle, setToggle] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -30,6 +30,12 @@ function Header() {
   const goRegister = () => {
     navigate("/registration");
   };
+
+  useEffect(() => {
+    if (user) {
+      setLoggedIn(true);
+    }
+  }, [user]);
 
   return (
     <div className="flex items-center justify-between p-5">
@@ -67,9 +73,11 @@ function Header() {
       </div>
 
       {loggedIn ? (
-        <div className="w-[40px] h-[40px] rounded-full bg-slate-500 text-black text-center flex  justify-center items-center font-bold text-xl">
-          F
-        </div>
+        <Link to="/userprofile" className="cursor-pointer">
+          <div className="w-[40px] h-[40px] rounded-full bg-slate-500 text-black text-center flex  justify-center items-center font-bold text-xl">
+            {user.email.charAt(0)}
+          </div>
+        </Link>
       ) : (
         <div className="ml-2">
           <button

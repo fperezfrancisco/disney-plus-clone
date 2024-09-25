@@ -4,10 +4,10 @@ import ProductionHouse from "../components/ProductionHouse";
 import Slider from "../components/Slider";
 import Header from "../components/Header";
 
-function Home() {
+function Home({ user }) {
   return (
     <div>
-      <Header />
+      <Header user={user} />
       <Slider />
       <ProductionHouse />
       <GenreMovieList />
