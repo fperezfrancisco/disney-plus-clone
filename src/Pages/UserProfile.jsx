@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import { auth } from "../firebase/init";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Watchlist from "../components/Watchlist";
 
-function UserProfile({ user, setUser }) {
+function UserProfile({ user, setUser, watchList, setWatchList }) {
   const navigate = useNavigate();
+
+  const [userWatchlist, setUserWatchlist] = useState(watchList);
 
   const handleSignOut = () => {
     console.log("User wants sign out");
@@ -23,7 +26,7 @@ function UserProfile({ user, setUser }) {
   return (
     <div>
       <Header user={user} />
-      <section className="w-full min-w-full min-h-[600px] h-full mb-4 p-4 flex flex-col relative md:p-8 md:pt-2">
+      <section className="w-full min-w-full min-h-full h-full mb-4 p-4 flex flex-col relative md:p-8 md:pt-2">
         <div className="userCopy flex w-full p-4 mt-0 flex-col items-start gap-4">
           <h1 className="usertitle text-white text-[2.5rem]">User Profile</h1>
           <h2 className="text-white text-[1.25rem] my-1">
@@ -36,6 +39,10 @@ function UserProfile({ user, setUser }) {
             Sign Out
           </button>
         </div>
+      </section>
+      <section className="w-full p-4 md:p-8 flex flex-col">
+        <h2 className="text-white text-[1.75rem] px-4">My Watchlist</h2>
+        <Watchlist watchList={userWatchlist} setWatchList={setWatchList} />
       </section>
     </div>
   );

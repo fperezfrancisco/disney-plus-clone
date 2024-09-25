@@ -19,11 +19,13 @@ function LoginModal({ cancelModal, registerUser, setRegisterUser }) {
         const user = userCredential.user;
         console.log(user);
         setRegisterUser(user);
+        navigate("/userprofile");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert("Error!");
         console.log(errorMessage + errorCode);
       });
   };

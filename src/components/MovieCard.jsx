@@ -4,6 +4,7 @@ const image_base_url = "https://image.tmdb.org/t/p/original";
 
 function MovieCard({ movie }) {
   const imageUrl = image_base_url + movie.poster_path;
+
   const [img, setImg] = useState();
   const navigate = useNavigate();
 

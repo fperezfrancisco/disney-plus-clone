@@ -7,18 +7,26 @@ import RecommendedMovieList from "../components/RecommendedMovieList";
 import Header from "../components/Header";
 const image_base_url = "https://image.tmdb.org/t/p/original";
 
-function MoviePage({ user }) {
+function MoviePage({ user, watchList, setWatchList }) {
   const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [movie, setMovie] = useState();
-
-  console.log("Movie Id: " + id);
 
   const getMovie = () => {
     GlobalApi.getMovieDetails(id).then((resp) => {
       console.log(resp.data);
       setMovie(resp.data);
     });
+  };
+
+  const handleWatchlistClick = () => {
+    console.log(movie);
+    console.log(id);
+    const newWatchList = [...watchList];
+    console.log(newWatchList);
+    newWatchList.push(movie);
+    setWatchList(newWatchList);
+    alert("Movie added to watchlist!");
   };
 
   useEffect(() => {
@@ -64,9 +72,18 @@ function MoviePage({ user }) {
                 <p className="sectionPara flex w-full max-w-full md:max-w-[700px]">
                   {movie.overview}
                 </p>
-                <button className="p-4 text-white cursor-not-allowed bg-blue-800 rounded-lg font-medium text-sm pl-8 pr-8 mt-4 flex items-center gap-2">
-                  <i class="bx bx-play-circle text-[1.5rem]"></i> Play Selection
-                </button>
+                <div className="flex flex-row w-full items-center content-center justify-start gap-3 my-8">
+                  <button className="p-4 text-white cursor-not-allowed bg-blue-800 rounded-lg font-medium text-sm pl-8 pr-8 flex items-center gap-2">
+                    <i class="bx bx-play-circle text-[1.5rem]"></i> Play
+                    Selection
+                  </button>
+                  <button
+                    className="p-4 border-blue-800 border-[2px] text-blue-400 hover:bg-slate-700 rounded-md text-sm px-8 "
+                    onClick={handleWatchlistClick}
+                  >
+                    Add to watchlist
+                  </button>
+                </div>
               </div>
               <div className="movieBackground flex md:absolute w-full h-full z-5 top-0 bottom-0 right-0 left-0 object-cover">
                 <img

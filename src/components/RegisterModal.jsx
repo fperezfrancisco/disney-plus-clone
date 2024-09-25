@@ -22,13 +22,12 @@ function RegisterModal({ cancelModal, registerUser, setRegisterUser }) {
         console.log(resp.user);
         alert("Registered!");
         setRegisterUser(resp.user);
+        navigate("/userprofile");
       })
       .catch((err) => {
         console.log(err.message);
         alert("Something went wrong");
       });
-
-    navigate("/");
   };
 
   return (

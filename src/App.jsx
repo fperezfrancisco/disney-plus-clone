@@ -18,13 +18,17 @@ function App() {
   const [count, setCount] = useState(0);
   const [sliderLoaded, setSliderLoaded] = useState(false);
   const [user, setUser] = useState();
+  const [currWatchList, setCurrWatchList] = useState([]);
 
   useEffect(() => {
     console.log(user);
     if (user) {
       console.log("New user logged in!");
     }
-  }, [user]);
+    if (currWatchList) {
+      console.log(currWatchList);
+    }
+  }, [user, currWatchList]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -42,7 +46,16 @@ function App() {
       <BrowserRouter basename="/disney-plus-clone">
         <Routes>
           <Route path="/" index element={<Home user={user} />} />
-          <Route path="/movie/:id" element={<MoviePage user={user} />} />
+          <Route
+            path="/movie/:id"
+            element={
+              <MoviePage
+                user={user}
+                watchList={currWatchList}
+                setWatchList={setCurrWatchList}
+              />
+            }
+          />
           <Route
             path="/registration"
             exact
@@ -50,7 +63,14 @@ function App() {
           />
           <Route
             path="/userprofile"
-            element={<UserProfile user={user} setUser={setUser} />}
+            element={
+              <UserProfile
+                user={user}
+                setUser={setUser}
+                watchList={currWatchList}
+                setWatchList={setCurrWatchList}
+              />
+            }
           />
         </Routes>
       </BrowserRouter>

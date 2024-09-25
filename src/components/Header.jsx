@@ -21,7 +21,7 @@ function Header({ user }) {
   const menu = [
     { name: "HOME", icon: HiHome, link: "/" },
     { name: "SEARCH", icon: HiMagnifyingGlass, link: "/" },
-    { name: "WATCH LIST", icon: HiPlus, link: "/" },
+    { name: "WATCH LIST", icon: HiPlus, link: "/userprofile" },
     //{ name: "ORIGINALS", icon: HiStar },
     { name: "MOVIES", icon: HiPlayCircle, link: "/" },
     { name: "SERIES", icon: HiTv, link: "/" },
