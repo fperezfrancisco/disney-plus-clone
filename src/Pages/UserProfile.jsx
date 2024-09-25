@@ -15,12 +15,18 @@ function UserProfile({ user, setUser, watchList, setWatchList }) {
     signOut(auth)
       .then(() => {
         setUser(null);
+        setUserWatchlist([]);
+        setWatchList([]);
         alert("User signed out!");
         navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleSignIn = () => {
+    navigate("/registration");
   };
 
   return (
@@ -32,12 +38,21 @@ function UserProfile({ user, setUser, watchList, setWatchList }) {
           <h2 className="text-white text-[1.25rem] my-1">
             {user && user.email}
           </h2>
-          <button
-            className="my-2 w-[200px] py-4 px-6 bg-teal-600 rounded-lg text-sm font-medium hover:bg-teal-500 text-white"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button>
+          {user ? (
+            <button
+              className="my-2 w-[200px] py-4 px-6 bg-teal-600 rounded-lg text-sm font-medium hover:bg-teal-500 text-white"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          ) : (
+            <button
+              className="my-2 w-[200px] py-4 px-6 bg-teal-600 rounded-lg text-sm font-medium hover:bg-teal-500 text-white"
+              onClick={handleSignIn}
+            >
+              Sign In
+            </button>
+          )}
         </div>
       </section>
       <section className="w-full p-4 md:p-8 flex flex-col">

@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/init";
+import { auth, db } from "../firebase/init";
 import logo from "../assets/Images/disney-logo-official.png";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
 
 function RegisterModal({ cancelModal, registerUser, setRegisterUser }) {
   const [userEmail, setUserEmail] = useState();
   const [userPassword, setUserPassword] = useState();
   const navigate = useNavigate();
+
+  async function createWatchlist(userId) {
+    const watchlist = {
+      uid: userId,
+      watchlist: [],
+    };
+    await addDoc(collection(db, "watchlists"), watchlist);
+  }
 
   const handleBack = () => {
     cancelModal(false);
@@ -20,9 +29,12 @@ function RegisterModal({ cancelModal, registerUser, setRegisterUser }) {
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then((resp) => {
         console.log(resp.user);
+        //create user watchlist
+        createWatchlist(resp.user.uid);
+        //
         alert("Registered!");
         setRegisterUser(resp.user);
-        navigate("/userprofile");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);

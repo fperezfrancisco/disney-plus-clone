@@ -19,7 +19,7 @@ function LoginModal({ cancelModal, registerUser, setRegisterUser }) {
         const user = userCredential.user;
         console.log(user);
         setRegisterUser(user);
-        navigate("/userprofile");
+        navigate("/");
         // ...
       })
       .catch((error) => {
